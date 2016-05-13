@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+{
+    Route::get('/admin', function()
+    {
+        return view("admin.home");
+        // can only access this if type == A
+    });
+
+});
+
